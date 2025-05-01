@@ -105,9 +105,9 @@ ring-based lattice cryptography that supports FHE.
 * [NFLlib](https://github.com/quarkslab/NFLlib): This library is an outgrowth of the European *HEAT* 
 project to explore high-performance homomorphic encryption using low-level processor primitives.
 
-		* [HEAT](https://github.com/bristolcrypto/HEAT): This library focuses on an API that bridges `FV-NFLib` and `HeLIB`.
+	* [HEAT](https://github.com/bristolcrypto/HEAT): This library focuses on an API that bridges `FV-NFLib` and `HeLIB`.
 
-		* [HEAT](https://github.com/KULeuven-COSIC/HEAT/): A HW accelerator implementation for `FV-NFLlib`.
+	* [HEAT](https://github.com/KULeuven-COSIC/HEAT/): A HW accelerator implementation for `FV-NFLlib`.
 
 * [cuHE](https://github.com/vernamlab/cuHE): This library explores the use of GPGPUs to accelerate homomorphic encryption.
 
