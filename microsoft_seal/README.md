@@ -84,3 +84,48 @@ a foundational requirement for applying homomorphic encryption to digital forens
 * **BatchEncoder**: Enables vector-style plaintext encoding, necessary for efficient computation.
 
 * **Evaluator**: Performs operations (here, multiplication) on ciphertexts.
+
+## [seal_batch_test.cpp](./seal_batch_test.cpp)
+
+
+### Description
+
+This example demonstrates the basic use of batch encoding in the `BFV` scheme 
+using Microsoft SEAL. It encodes a vector of integers, encrypts them, performs 
+a simple homomorphic operation (multiplication by a plaintext scalar), 
+and decrypts the result.
+
+This test helps verify that batching is correctly enabled and functioning, 
+serving as a foundational step for more advanced operations like 
+`slot-wise` processing in encrypted data — which is crucial in 
+digital forensics workflows involving evidence scoring or filtering.
+
+### Features Demonstrated
+
+* Use of the `BFV` encryption scheme
+
+* Batch encoding of a vector using `BatchEncoder`
+
+* Encryption and decryption using `Encryptor` and `Decryptor`
+
+* Homomorphic multiplication of encrypted data by a plaintext scalar
+
+* Full homomorphic computation cycle: `encode →  encrypt →  evaluate →  decrypt →  decode`
+
+
+### Relevance to Digital Forensics
+
+This test simulates a simplified scenario where a value 
+(e.g., an evidence weight or score) is encrypted, 
+homomorphically manipulated, and then decrypted. 
+
+In forensic workflows, such computations could be used to 
+securely apply scoring rules or filters to encrypted data 
+without exposing the underlying evidence.
+
+### Output Example
+
+```
+Total keyword hits (encrypted): 3
+```
+
