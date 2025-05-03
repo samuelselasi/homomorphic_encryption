@@ -129,3 +129,68 @@ without exposing the underlying evidence.
 Total keyword hits (encrypted): 3
 ```
 
+
+## [seal_ckks_test.cpp](./seal_ckks_test.cpp)
+
+### Description
+
+This program is a basic demonstration of Microsoft SEAL's CKKS scheme, 
+which enables approximate arithmetic over real numbers using homomorphic encryption. 
+The test encrypts a vector of real numbers, performs homomorphic addition 
+(doubling the vector), then decrypts and compares the results to the expected plaintext values.
+
+***It showcases***:
+
+* Setting up encryption parameters for `CKKS`.
+
+* Encoding and encrypting real numbers.
+
+* Performing encrypted addition.
+
+* Decrypting and decoding results.
+
+* Calculating approximation errors introduced by the encryption scheme.
+
+### Purpose
+
+This test is part of a larger thesis project exploring the 
+applicability of Homomorphic Encryption in Digital Forensics workflows. 
+
+***Specifically, this file***:
+
+* Verifies `CKKS` support in Microsoft SEAL.
+
+* Demonstrates `real-number` support (as opposed to only integers).
+
+* Tests basic operations that would be relevant in forensic metrics 
+(e.g., aggregating evidence scores, similarity rankings, etc.).
+
+### Key Operations
+
+* CKKS Setup with parameters {60, 40, 40, 60} for 128-bit security.
+
+* Encoding a vector: [3.5, 7.2, 1.8, 4.3].
+
+* Homomorphic Addition (doubles each number).
+
+* Decryption & Decoding back to floating-point results.
+
+* Error Measurement to quantify the loss due to approximate encryption.
+
+### Sample Output
+
+```
+Input data: 3.5 7.2 1.8 4.3 
+Encryption successful!
+Homomorphic operations completed!
+
+===== Results =====
+Expected result (input + input): 7 14.4 3.6 8.6 
+Decrypted result: 7.0001 14.3998 3.5999 8.5999 
+
+Approximation error:
+Element 0: 0.0001
+Element 1: 0.0002
+Element 2: 0.0001
+Element 3: 0.0001
+```
