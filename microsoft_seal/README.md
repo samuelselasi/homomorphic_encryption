@@ -130,6 +130,7 @@ Total keyword hits (encrypted): 3
 ```
 
 
+
 ## [seal_ckks_test.cpp](./seal_ckks_test.cpp)
 
 ### Description
@@ -194,3 +195,86 @@ Element 1: 0.0002
 Element 2: 0.0001
 Element 3: 0.0001
 ```
+
+
+## [seal_forensics_test.cpp](./seal_forensics_test.cpp)
+
+### Description
+
+This program demonstrates a proof-of-concept forensic keyword search system using 
+homomorphic encryption (*CKKS scheme*) with Microsoft SEAL. 
+It simulates searching for forensic-relevant keywords (e.g., "murder", "fraud") 
+across a collection of encrypted documents—without revealing the actual search query or keyword values.
+
+
+### Goals
+
+* Show how encrypted keywords can be searched homomorphically.
+
+* Demonstrate a basic forensic use case with encrypted metadata.
+
+* Provide a privacy-preserving approach to keyword matching.
+
+* Serve as a sandbox for refining ideas in the thesis.
+
+### How It Works
+
+* **Database Simulation**: A sample database of ForensicDocument structs is created, 
+each with mock encrypted content and a list of keywords.
+
+* **Keyword Encryption**: Keywords are converted into numeric hashes and 
+encoded/encrypted using `CKKS`.
+
+* **Search Query**: A user inputs a keyword. This is also encoded and used 
+for homomorphic comparison.
+
+* **Search Logic**: The system checks for encrypted matches via homomorphic 
+subtraction and decrypts only the result of that comparison (not the content or keywords).
+
+* **Results**: Matching document IDs are shown to the user.
+
+
+### Key Features
+
+| **Component**                 | **Description**                                                                 |
+|------------------------------|---------------------------------------------------------------------------------|
+| **Scheme**                   | CKKS (supports real-number encryption with approximate arithmetic)              |
+| **Keyword Encoding**         | Character-sum hash encoded into the first slot of a CKKS plaintext vector       |
+| **Homomorphic Operation**    | Subtraction used to compare encrypted keyword and encrypted query               |
+| **Forensic Use-Case Simulated** | Searching encrypted metadata for evidence-related keywords                   |
+| **Security Model**           | Only the difference result is decrypted; keywords and queries remain encrypted |
+
+
+### Sample Output
+
+```
+===== Forensic Encryption Parameters =====
+Scheme: CKKS (for approximate numeric operations)
+Poly modulus degree: 8192
+Security level: ~128 bits
+=======================================
+
+Forensic Keyword Search (type 'exit' to quit)
+Available keywords: alibi blood documents fraud gun jewelry kidnapping knife murder phone ransom safe signature theft 
+Enter search term: fraud
+Documents containing 'fraud': DOC-3
+
+```
+
+
+### Limitations
+
+* **Keyword Hashing**: The use of simple *character-sum* hashing is insecure in real systems.
+
+* **Content Encryption**: This demo does not actually encrypt document content — 
+only keyword metadata is handled securely.
+
+* **Client/Server Separation**: All operations happen locally; no client-server separation is modeled yet.
+
+
+### Relevance to Thesis
+
+This example directly supports the goal of **preserving third-party privacy** 
+in forensic searches. Only the presence of a keyword match is revealed — 
+**not the keywords themselves or unrelated document content**.
+
