@@ -29,25 +29,25 @@ This repository contains my thesis research on applying Microsoft SEAL's homomor
 ```
 bash
 ```
-## Clone with submodules
+### Clone with submodules
 
 ```
 git clone --recursive https://github.com/samuelselasi/homomorphic_encryption.git
 cd homomorphic_encryption/microsoft_seal
 ```
 
-# Configure
+### Configure
 
 ```
 mkdir build && cd build
 cmake -DCMAKE_BUILD_TYPE=Release ..
 ```
-# Build
+### Build
 ```
 make -j$(nproc)
 ```
 
-# Run tests
+### Run tests
 ```
 ctest --output-on-failure
 ```
